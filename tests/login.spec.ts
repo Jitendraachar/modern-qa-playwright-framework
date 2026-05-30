@@ -1,17 +1,20 @@
 import { test, expect } from '@playwright/test';
+import { Loginpage } from '../pages/Loginpage';
+import { ENV } from '../config/env';
 
-test('Login page validation', async ({ page }) => {
-    
-    await page.goto('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login');
+test('Login validation', async ({ page }) => {
 
-    await expect(page.locator('input[name="username"]')).toBeVisible();
+    await page.goto(ENV.baseurl);
 
-    await page.fill('input[name="username"]', 'Admin');
+    const loginPage = new Loginpage(page);
 
-    await page.fill('input[name="password"]', 'admin123');
+    await loginPage.login(
+      'Admin',
+      'admin123'
+    );
 
-    await page.click('button[type="submit"]');
-
-    await expect(page.locator('//h6[text()="Dashboard"]')).toBeVisible();
+    await expect(
+      page.locator('//h6[text()="Dashboard"]')
+    ).toBeVisible();
 
 });
