@@ -1,14 +1,17 @@
 import { Page } from '@playwright/test';
-export class Loginpage {
-    constructor(private page: Page) {}
+import { BasePage } from './Basepage';
+export class Loginpage extends BasePage {
+   
     username = 'input[name="username"]';
     password = 'input[name="password"]';
     loginButton = 'button[type="submit"]';
 
     async login(user: string, pass: string){
 
-        await this.page.fill(this.username, user);
-        await this.page.fill(this.password, pass);
-        await this.page.click(this.loginButton);
+        await this.fill(this.username, user);
+        await this.fill(this.password, pass);
+        await this.click(this.loginButton);
+        
     }
+    
 }

@@ -4,7 +4,7 @@ import { ENV } from '../config/env';
 
 test('Login validation', async ({ page }) => {
 
-    await page.goto(ENV.baseurl);
+    await page.goto(ENV.baseUrl);
 
     const loginPage = new Loginpage(page);
 
@@ -16,5 +16,5 @@ test('Login validation', async ({ page }) => {
     await expect(
       page.locator('//h6[text()="Dashboard"]')
     ).toBeVisible();
-
+    await loginPage.takeScreenshot("dashboard");
 });
